@@ -13,27 +13,31 @@ migrate = Migrate()
 def create_app():
     app = Flask(__name__)
 
-    # Use PostgreSQL database URI from environment variable or default to SQLite for local development
-    #app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///customers_orders.db'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://uclgkc1cdu6e5u:pd86eb92861e11df08115e411c12194b438c6313b8905c8b35300a280486c24b5@c8lj070d5ubs83.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/dlm68v7s924er'
-
+    # Use PostgreSQL database URI from environment variables
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///customers_orders.db')
     
-    # Print the database URI for debugging
+    # Debugging print (Optional: Remove in production)
     print(f"Database URI: {app.config['SQLALCHEMY_DATABASE_URI']}")
     
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', '9RDcyhM8K50jsA8X4ZymxVMdsBkO_VnrpMLbuJuX5YXDXZi0d7pXV5nc1RTuzRdC')
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default_secret_key')  # Should be a strong random key in production
 
-    # Define the path to the JSON file
+    # Define the path to the client secrets JSON file
     json_path = os.path.join(os.path.dirname(__file__), 'client_secrets.json')
     
-    # Print the path for debugging
-    print(f"Looking for file at: {json_path}")
+    try:
+        # Load client secrets securely
+        with open(json_path) as f:
+            secrets = json.load(f)
+    except FileNotFoundError:
+        raise RuntimeError(f"client_secrets.json not found at {json_path}")
+    except json.JSONDecodeError:
+        raise RuntimeError(f"Error decoding client_secrets.json at {json_path}")
     
-    # Load client secrets
-    with open(json_path) as f:
-        secrets = json.load(f)
+    # Debugging print (Optional: Remove in production)
+    print(f"Loaded secrets from: {json_path}")
     
+    # Configure Auth0 settings
     auth0_config = secrets['web']
     app.config['AUTH0_CLIENT_ID'] = auth0_config['client_id']
     app.config['AUTH0_CLIENT_SECRET'] = auth0_config['client_secret']
@@ -44,9 +48,9 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
     
-    # Initialize OAuth
+    # Initialize OAuth and register Auth0
     oauth.init_app(app)
-    auth0 = oauth.register(
+    oauth.register(
         'auth0',
         client_id=app.config['AUTH0_CLIENT_ID'],
         client_secret=app.config['AUTH0_CLIENT_SECRET'],
@@ -59,7 +63,7 @@ def create_app():
         issuer=auth0_config['issuer']
     )
     
-    # Import routes blueprint
+    # Import and register the routes blueprint
     from .routes import main
     app.register_blueprint(main)
     
