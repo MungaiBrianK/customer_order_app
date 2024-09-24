@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: url('https://via.placeholder.com/1500x300/007bff/ffffff?text=') no-repeat center;
+            color: white;
+            text-align: center;
+            padding: 50px 0;
+        }
+        .welcome-info {
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+        .welcome-info h2 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        .sidebar {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            background-color: #343a40;
+            padding: 20px;
+            color: white;
+        }
+        .content {
+            margin-left: 260px;
+            padding: 20px;
+        }
+        .sidebar a {
+            color: white;
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .sidebar a:hover {
+            background-color: #007bff;
+        }
+        h2 {
+            color: #343a40;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Registered Customers</h1>
+</div>
+
+<div class="sidebar">
+    <h3>Navigation</h3>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/customers">Customers</a>
+    <a href="/orders">Orders</a>
+    <a href="/manage" class="btn btn-warning">Admin Actions</a>
+</div>
+
+<div class="content">
+    <h2>Customers</h2>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Phone Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+            <tr>
+                <td>{{ customer.id }}</td>
+                <td>{{ customer.name }}</td>
+                <td>{{ customer.code }}</td>
+                <td>{{ customer.phone_number }}</td>
+                <td>
+                    <a href="{{ url_for('main.manage') }}" class="btn btn-success btn-sm">
+                        <i class="bi bi-pencil-square"></i> Edit
+                    </a>
+                    <a href="{{ url_for('main.manage') }}" class="btn btn-danger btn-sm">
+                        <i class="bi bi-trash"></i> Delete
+                    </a>
+                </td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
+</body>
+</html>
