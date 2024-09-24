@@ -14,7 +14,9 @@ def create_app():
     app = Flask(__name__)
 
     # Use PostgreSQL database URI from environment variable or default to SQLite for local development
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///customers_orders.db'
+    #app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///customers_orders.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://uclgkc1cdu6e5u:pd86eb92861e11df08115e411c12194b438c6313b8905c8b35300a280486c24b5@c8lj070d5ubs83.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/dlm68v7s924er'
+
     
     # Print the database URI for debugging
     print(f"Database URI: {app.config['SQLALCHEMY_DATABASE_URI']}")
