@@ -26,7 +26,7 @@ comm==0.2.2
 contourpy==1.2.1
 cryptography==43.0.0
 cycler==0.12.1
-debugpy==1.8.5
+debugpy==1.8.3
 decorator==5.1.1
 defusedxml==0.7.1
 distlib==0.3.8
@@ -106,6 +106,7 @@ pooch==1.8.2
 prometheus_client==0.20.0
 prompt_toolkit==3.0.47
 psutil==6.0.0
+psycopg2-binary==2.9.9
 pure_eval==0.2.3
 pycparser==2.22
 Pygments==2.18.0
@@ -116,6 +117,10 @@ pyshp==2.3.1
 pytesseract==0.3.13
 python-dateutil==2.9.0.post0
 python-json-logger==2.0.7
+pytz==2024.1
+pyviz_comms==3.0.3
+pywin32==306
+pywinpty==2.0.13
 PyYAML==6.0.1
 pyzmq==26.0.3
 referencing==0.35.1
