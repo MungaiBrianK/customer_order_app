@@ -13,3 +13,6 @@ This project implements a simple service using Python to manage customers and or
 - **SMS Notifications**: Alerts sent to customers when an order is added using the Africa’s Talking SMS gateway.
 - **Testing**: Unit tests with coverage checking.
 - **Continuous Integration/Deployment**: Automated setup for CI/CD pipelines.
+
+## Link
+To access this application -----> https://customer-order-app-04b04143e45b.herokuapp.com/login
