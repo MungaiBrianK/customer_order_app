@@ -4,7 +4,7 @@ deploy:
   steps:
     # Step 1: Checkout the code again
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v3 
 
     # Step 2: Install Heroku CLI (Required for deployment)
     - name: Install Heroku CLI
