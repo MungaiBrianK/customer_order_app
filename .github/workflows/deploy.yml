@@ -57,7 +57,7 @@ jobs:
 
           # Set Git credentials
           git config --global user.email "kamaubrikam@gmail.com" 
-          git config --global user.name "kamaubrikam@gmail.com"  
+          git config --global user.name "MungaiBrianK"  
 
           echo "Deploying to Heroku..."
           git push https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }} main --force --set-upstream
