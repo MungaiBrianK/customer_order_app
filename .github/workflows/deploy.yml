@@ -53,12 +53,18 @@ jobs:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
           echo "Setting Heroku remote..."
+          
+          # Log the Heroku app name for debugging
+          echo "Using HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}"
+
+          # Set Heroku remote
           heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}
 
           # Set Git credentials
-          git config --global user.email "kamaubrikam@gmail.com" 
-          git config --global user.name "MungaiBrianK"  
+          git config --global user.email "kamaubrikam@gmail.com"
+          git config --global user.name "MungaiBrianK"
 
+          # Deploy to Heroku
           echo "Deploying to Heroku..."
           git push https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }} main --force --set-upstream
 
