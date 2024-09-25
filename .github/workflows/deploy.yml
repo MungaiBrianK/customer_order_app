@@ -43,25 +43,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Install Heroku CLI (Required for deployment)
+      # Step 2: Install Heroku CLI
       - name: Install Heroku CLI
         run: curl https://cli-assets.heroku.com/install.sh | sh
 
-      # Step 3: Login to Heroku
-      - name: Login to Heroku
+      # Step 3: Authenticate with Heroku
+      - name: Authenticate with Heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
           echo "Logging in to Heroku..."
-          heroku auth:token
+          echo $HEROKU_API_KEY | heroku auth:token > ~/.netrc
 
-      # Step 4: Deploy to Heroku using explicit URL
+      # Step 4: Deploy to Heroku using git push
       - name: Deploy to Heroku
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
           echo "Deploying to Heroku..."
-          git push https://git.heroku.com/customer-order-app.git main --force --set-upstream
+          git remote add heroku https://git.heroku.com/customer-order-app.git
+          git push heroku main --force
 
       # Step 5: Clean up old releases (optional)
       - name: Clean up releases (optional)
