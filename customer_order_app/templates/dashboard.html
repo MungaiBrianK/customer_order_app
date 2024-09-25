@@ -16,8 +16,21 @@
             text-align: center;
             padding: 40px 0;
         }
+        @media (max-width: 768px) {
+        .header {
+            padding: 20px 0;
+            background-size: contain; /* Contain the image for smaller screens */
+            }
+        }
+
+        @media (max-width: 576px) {
+        .header {
+            padding: 15px 0;
+            background-size: contain; /* Ensure background image is adjusted */
+            }
+        }
         .welcome-info {
-            margin-top: 10px;
+            margin-top: 50px;
         }
         .sidebar {
             height: 100vh;

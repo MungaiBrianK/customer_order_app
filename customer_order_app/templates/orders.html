@@ -28,16 +28,10 @@
             background-color: #343a40;
             padding: 20px;
             color: white;
-            transform: translateX(-100%); /* Initially hidden off-screen */
-            transition: transform 0.3s ease; /* Smooth transition */
-        }
-        .sidebar.open {
-            transform: translateX(0); /* Slide in when opened */
         }
         .content {
             margin-left: 260px;
             padding: 20px;
-            transition: margin-left 0.3s;
         }
         .sidebar a {
             color: white;
@@ -56,32 +50,19 @@
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .sidebar {
-                display: block; /* Ensure sidebar can be shown */
+                display: none; /* Hide sidebar on smaller screens */
             }
             .content {
-                margin-left: 0; /* No margin when sidebar is hidden */
+                margin-left: 0;
                 padding: 10px;
             }
-        }
-
-        .menu-toggle {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 1;
-            background-color: #343a40;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1>Order List</h1>
+    <h1>Registered Customers</h1>
 </div>
 
 <!-- Mobile Navigation for smaller screens -->
@@ -95,10 +76,10 @@
                 <a class="nav-link" href="/dashboard">Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/customers">Customers</a>
+                <a class="nav-link active" href="/customers">Customers</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="/orders">Orders</a>
+                <a class="nav-link" href="/orders">Orders</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link btn btn-warning" href="/manage">Admin Actions</a>
@@ -107,7 +88,7 @@
     </div>
 </nav>
 
-<div class="sidebar" id="sidebar">
+<div class="sidebar">
     <h3>Navigation</h3>
     <a href="/dashboard">Dashboard</a>
     <a href="/customers">Customers</a>
