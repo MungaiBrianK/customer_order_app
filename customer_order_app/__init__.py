@@ -15,7 +15,7 @@ def create_app():
 
     # Use PostgreSQL database URI from environment variable or default to SQLite for local development
     #app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///customers_orders.db'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://u1at2uftshjs51:pb0b9501ec8b97e5d3fa13e11cd30db4dda6bef60f275e1fb15a95cc3e0d1907c@cd1goc44htrmfn.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/de4prsin4282rf'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://u1at2uftshjs51:pb0b9501ec8b97e5d3fa13e11cd30db4dda6bef60f275e1fb15a95cc3e0d1907c@cd1goc44htrmfn.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/de4prsin4282rf'
 
     
     # Print the database URI for debugging
