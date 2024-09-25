@@ -52,12 +52,15 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
-          echo "Logging in to Heroku..."
-          echo $HEROKU_API_KEY | heroku auth:token
           echo "Setting Heroku remote..."
           heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}
+
+          # Set Git credentials
+          git config --global user.email "kamaubrikam@gmail.com" 
+          git config --global user.name "kamaubrikam@gmail.com"  
+
           echo "Deploying to Heroku..."
-          git push heroku main
+          git push https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }} main --force --set-upstream
 
       # Step 4: Clean up old releases (optional)
       - name: Clean up releases (optional)
