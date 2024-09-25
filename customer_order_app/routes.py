@@ -47,7 +47,7 @@ def create_app(config_name):
     app = Flask(__name__)
 
     # Configure the app
-    app.config['SECRET_KEY'] = 'your-secret-key'
+    app.config['SECRET_KEY'] = '9RDcyhM8K50jsA8X4ZymxVMdsBkO_VnrpMLbuJuX5YXDXZi0d7pXV5nc1RTuzRdC'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
     app.config['TESTING'] = True
     app.config['DEBUG'] = True
