@@ -52,15 +52,16 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
-          echo "Logging in to Heroku..."
           echo $HEROKU_API_KEY | heroku auth:token > ~/.netrc
 
-      # Step 4: Deploy to Heroku using git push
-      - name: Deploy to Heroku
+      # Step 4: Push code to Heroku using Heroku CLI
+      - name: Deploy to Heroku via Heroku CLI
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
-          echo "Deploying to Heroku..."
-          git remote add heroku https://git.heroku.com/customer-order-app.git
-          git push heroku main --force
+          echo "Deploying using Heroku CLI..."
+          heroku git:remote -a customer-order-app
+          git push heroku main
 
       # Step 5: Clean up old releases (optional)
       - name: Clean up releases (optional)
