@@ -22,8 +22,8 @@ jobs:
         with:
           python-version: '3.12.4'
 
-      # Step 3: Install dependencies with pre-built binaries
-      - name: Install dependencies with pre-built binaries
+      # Step 3: Install dependencies
+      - name: Install dependencies
         env:
           CRYPTOGRAPHY_DONT_BUILD_RUST: 1
         run: |
@@ -43,27 +43,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Install Heroku CLI
+      # Step 2: Install Heroku CLI (Required for deployment)
       - name: Install Heroku CLI
         run: curl https://cli-assets.heroku.com/install.sh | sh
 
-      # Step 3: Authenticate with Heroku
-      - name: Authenticate with Heroku
+      # Step 3: Deploy to Heroku using the API key in the Git URL
+      - name: Deploy to Heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
-          echo $HEROKU_API_KEY | heroku auth:token > ~/.netrc
+          echo "Setting Heroku remote..."
+          git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+          
+          echo "Deploying to Heroku..."
+          git push heroku main --force
 
-      # Step 4: Push code to Heroku using Heroku CLI
-      - name: Deploy to Heroku via Heroku CLI
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: |
-          echo "Deploying using Heroku CLI..."
-          heroku git:remote -a customer-order-app
-          git push heroku main
-
-      # Step 5: Clean up old releases (optional)
+      # Step 4: Clean up old releases (optional)
       - name: Clean up releases (optional)
         run: |
-          heroku releases:clean --app customer-order-app
+          heroku releases:clean --app ${{ secrets.HEROKU_APP_NAME }}
