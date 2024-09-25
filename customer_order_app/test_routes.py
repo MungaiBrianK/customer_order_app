@@ -29,7 +29,7 @@ class AppTestCase(unittest.TestCase):
         self.client.post('/customers', json={
             'name': 'John Doe',
             'code': 'C123',
-            'phone_number': '+254783623070'
+            'phone_number': '+254xxxxxxxxx'
         })
         
         response = self.client.post('/orders', json={
