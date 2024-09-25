@@ -59,9 +59,13 @@ jobs:
           echo "Setting Heroku remote..."
           git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
           
-          # Unshallow the clone by fetching the entire history
-          echo "Unshallowing the repository..."
-          git fetch --unshallow
+          # Check if the repository is shallow before unshallowing
+          if [ -f $(git rev-parse --git-dir)/shallow ]; then
+            echo "Unshallowing the repository..."
+            git fetch --unshallow
+          else
+            echo "Repository is already fully cloned, skipping unshallow."
+          fi
           
           echo "Deploying to Heroku..."
           git push heroku main --force
