@@ -55,18 +55,15 @@ jobs:
           echo "Logging in to Heroku..."
           heroku auth:token
 
-      # Step 4: Set Heroku remote and deploy
+      # Step 4: Deploy to Heroku using explicit URL
       - name: Deploy to Heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
-          echo "Setting Heroku remote..."
-          heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}
-
           echo "Deploying to Heroku..."
-          git push https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }} main --force --set-upstream
+          git push https://git.heroku.com/customer-order-app.git main --force --set-upstream
 
       # Step 5: Clean up old releases (optional)
       - name: Clean up releases (optional)
         run: |
-          heroku releases:clean --app ${{ secrets.HEROKU_APP_NAME }}
+          heroku releases:clean --app customer-order-app
