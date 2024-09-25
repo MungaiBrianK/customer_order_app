@@ -14,7 +14,10 @@
             background: url('https://via.placeholder.com/1500x300/007bff/ffffff?text=Customer+Order+Dashboard') no-repeat center;
             color: white;
             text-align: center;
-            padding: 20px 0;
+            padding: 40px 0;
+        }
+        .welcome-info {
+            margin-top: 20px;
         }
         .sidebar {
             height: 100vh;
@@ -45,7 +48,7 @@
         }
         h2 {
             color: #343a40;
-            margin-bottom: 65px;
+            margin-bottom: 20px;
         }
         table {
             margin-top: 20px;
@@ -53,6 +56,9 @@
 
         /* Media Queries for Responsiveness */
         @media (max-width: 768px) {
+            .header {
+                padding: 20px 0;
+            }
             .sidebar {
                 position: relative;
                 height: auto;
@@ -61,6 +67,31 @@
             .content {
                 margin-left: 0;
                 padding: 10px;
+            }
+        }
+        @media (max-width: 576px) {
+            .header {
+                padding: 15px 0;
+            }
+            .welcome-info h2 {
+                font-size: 1.5rem;
+            }
+            .welcome-info p {
+                font-size: 0.9rem;
+            }
+            .sidebar {
+                width: 100%;
+                padding: 10px;
+            }
+            .sidebar a {
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+            .content {
+                padding: 5px;
+            }
+            h2 {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -90,12 +121,12 @@
         <h3>Add Customer</h3>
         <form id="customerForm" class="form-group">
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" class="form-control" required><br>
+            <input type="text" id="name" name="name" class="form-control" required>
             <label for="code">Code:</label>
-            <input type="text" id="code" name="code" class="form-control" required><br>
+            <input type="text" id="code" name="code" class="form-control" required>
             <label for="phone_number">Phone Number:</label>
-            <input type="text" id="phone_number" name="phone_number" class="form-control" required><br>
-            <input type="submit" value="Add Customer" class="btn btn-primary">
+            <input type="text" id="phone_number" name="phone_number" class="form-control" required>
+            <input type="submit" value="Add Customer" class="btn btn-primary mt-2">
         </form>
     </div>
 
@@ -103,12 +134,12 @@
         <h3>Add Order</h3>
         <form id="orderForm" class="form-group">
             <label for="item">Item:</label>
-            <input type="text" id="item" name="item" class="form-control" required><br>
+            <input type="text" id="item" name="item" class="form-control" required>
             <label for="amount">Amount:</label>
-            <input type="number" id="amount" name="amount" class="form-control" step="0.01" required><br>
+            <input type="number" id="amount" name="amount" class="form-control" step="0.01" required>
             <label for="customer_code">Customer Code:</label>
-            <input type="text" id="customer_code" name="customer_code" class="form-control" required><br>
-            <input type="submit" value="Add Order" class="btn btn-primary">
+            <input type="text" id="customer_code" name="customer_code" class="form-control" required>
+            <input type="submit" value="Add Order" class="btn btn-primary mt-2">
         </form>
     </div>
 
