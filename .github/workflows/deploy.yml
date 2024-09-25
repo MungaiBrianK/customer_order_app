@@ -12,50 +12,52 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    # Step 1: Checkout the code
-    - name: Checkout code
-      uses: actions/checkout@v3
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    # Step 2: Set up Python
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.12.4'
+      # Step 2: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12.4'
 
-    # Step 3: Install dependencies with pre-built binaries
-    - name: Install dependencies with pre-built binaries
-      env:
-        CRYPTOGRAPHY_DONT_BUILD_RUST: 1
-      run: |
-        python -m pip install --upgrade pip
-        pip install --prefer-binary -r requirements.txt
+      # Step 3: Install dependencies with pre-built binaries
+      - name: Install dependencies with pre-built binaries
+        env:
+          CRYPTOGRAPHY_DONT_BUILD_RUST: 1
+        run: |
+          python -m pip install --upgrade pip
+          pip install --prefer-binary -r requirements.txt
 
-    # Step 4: Run tests
-    - name: Run tests
-      run: |
-        python -m unittest discover -s customer_order_app
+      # Step 4: Run tests
+      - name: Run tests
+        run: |
+          python -m unittest discover -s customer_order_app
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    # Step 1: Checkout the code again
-    - name: Checkout code
-      uses: actions/checkout@v3
+      # Step 1: Checkout the code again
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    # Step 2: Install Heroku CLI (Required for deployment)
-    - name: Install Heroku CLI
-      run: curl https://cli-assets.heroku.com/install.sh | sh
+      # Step 2: Install Heroku CLI (Required for deployment)
+      - name: Install Heroku CLI
+        run: curl https://cli-assets.heroku.com/install.sh | sh
 
-    # Step 3: Deploy to Heroku
-    - name: Deploy to Heroku
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: |
-        heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}
-        git push heroku main
+      # Step 3: Deploy to Heroku
+      - name: Deploy to Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          echo "Setting Heroku remote..."
+          heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}  # Use the Heroku app name secret
+          echo "Deploying to Heroku..."
+          git push heroku main
 
-    # Step 4: Clean up old releases (optional)
-    - name: Clean up releases (optional)
-      run: |
-        heroku releases:clean --app ${{ secrets.HEROKU_APP_NAME }}
+      # Step 4: Clean up old releases (optional)
+      - name: Clean up releases (optional)
+        run: |
+          heroku releases:clean --app ${{ secrets.HEROKU_APP_NAME }}
