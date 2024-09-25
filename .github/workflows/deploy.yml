@@ -61,7 +61,7 @@ jobs:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
           echo "Deploying to Heroku..."
-          git push https://git.heroku.com/customer-order-app.git main --force --set-upstream
+          git push heroku main --force --set-upstream
 
       # Step 5: Clean up old releases (optional)
       - name: Clean up releases (optional)
