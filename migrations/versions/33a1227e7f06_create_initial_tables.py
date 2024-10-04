@@ -1,8 +1,8 @@
-"""Initial migration for SQLite
+"""create initial tables
 
-Revision ID: 2320bd1e12e7
+Revision ID: 33a1227e7f06
 Revises: 
-Create Date: 2024-09-25 13:24:01.488658
+Create Date: 2024-10-05 01:45:23.760218
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '2320bd1e12e7'
+revision = '33a1227e7f06'
 down_revision = None
 branch_labels = None
 depends_on = None
