@@ -15,4 +15,4 @@ This project implements a simple service using Python to manage customers and or
 - **Continuous Integration/Deployment**: Automated setup for CI/CD pipelines.
 
 ## Link
-To access this application -----> https://customer-order-app-04b04143e45b.herokuapp.com/login
+To access this application -----> https://kamarley-2ae854f96c6d.herokuapp.com/login
